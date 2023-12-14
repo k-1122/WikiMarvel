@@ -5,20 +5,18 @@ import com.example.wikimarvel.data.lists.Event;
 import com.example.wikimarvel.data.lists.Series;
 import com.example.wikimarvel.data.lists.Story;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
-public class Characters {
+public class Character {
     private int id;
     private String name;
     private String description;
-    private Date modified;
-    private String resourceURI;
+    private String modified;
     private String image;
-    private List<Comic> comicList;
-    private List<Story> storyList;
+    private List <Comic> comicList;
+    private List <Story> storyList;
     private List <Event> eventList;
     private List <Series> seriesList;
 
@@ -33,13 +31,12 @@ public class Characters {
     public String getName() {
         return name;
     }
-    public Characters(){}
-    public Characters(int id, String name, String description, Date modified, String resourceURI, String image, List<Comic> comicList, List<Story> storyList, List<Event> eventList, List<Series> seriesList) {
+    public Character(){}
+    public Character(int id, String name, String description, String modified, String image, List<Comic> comicList, List<Story> storyList, List<Event> eventList, List<Series> seriesList) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.modified = modified;
-        this.resourceURI = resourceURI;
         this.image = image;
         this.comicList = comicList;
         this.storyList = storyList;
@@ -59,22 +56,13 @@ public class Characters {
         this.description = description;
     }
 
-    public Date getModified() {
+    public String getModified() {
         return modified;
     }
 
-    public void setModified(Date modified) {
+    public void setModified(String modified) {
         this.modified = modified;
     }
-
-    public String getResourceURI() {
-        return resourceURI;
-    }
-
-    public void setResourceURI(String resourceURI) {
-        this.resourceURI = resourceURI;
-    }
-
     public String getImage() {
         return image;
     }
@@ -101,6 +89,21 @@ public class Characters {
 
     public List<Event> getEventList() {
         return eventList;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", modified='" + modified + '\'' +
+                ", image='" + image + '\'' +
+                ", comicList=" + comicList +
+                ", storyList=" + storyList +
+                ", eventList=" + eventList +
+                ", seriesList=" + seriesList +
+                '}';
     }
 
     public void setEventList(List<Event> eventList) {

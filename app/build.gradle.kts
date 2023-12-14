@@ -61,8 +61,5 @@ dependencies {
     dependencies {
         implementation ("com.squareup.okhttp3:okhttp:4.9.0")
     }
-    dependencies {
-        compileOnly ("org.projectlombok:lombok:1.18.12")
-        annotationProcessor ("org.projectlombok:lombok:1.18.12")
-    }
+
 }

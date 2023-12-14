@@ -3,7 +3,6 @@ package com.example.wikimarvel.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,15 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wikimarvel.R;
 import com.example.wikimarvel.api.ImageLoader;
-import com.example.wikimarvel.data.characters.Characters;
+import com.example.wikimarvel.data.characters.Character;
 
 import java.util.List;
 
 public class GridCharactersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Characters> characters;
-    public GridCharactersAdapter(List<Characters> characters){this.characters = characters;}
-    public void setCharacters(List<Characters> characters){
+    private List<Character> characters;
+    public GridCharactersAdapter(List<Character> characters){this.characters = characters;}
+    public void setCharacters(List<Character> characters){
         this.characters = characters;
         //notify...
 
@@ -49,7 +48,7 @@ public class GridCharactersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-    Characters character = characters.get(position);
+    Character character = characters.get(position);
     if(character == null)return;
 
     CharacterHolder characterHolder = (CharacterHolder) holder;
