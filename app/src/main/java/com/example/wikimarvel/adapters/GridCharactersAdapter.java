@@ -56,6 +56,7 @@ public class GridCharactersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     characterHolder.characterIdTV.setText(character.getId());
     characterHolder.nameTV.setText(character.getName());
     new ImageLoader().loadImage(character.getImage(), characterHolder.characterImgV);
+
     }
     @Override
     public int getItemCount() {
