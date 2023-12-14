@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wikimarvel.R;
+import com.example.wikimarvel.api.ImageLoader;
 import com.example.wikimarvel.data.characters.Characters;
 
 import java.util.List;
@@ -52,7 +53,9 @@ public class GridCharactersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     if(character == null)return;
 
     CharacterHolder characterHolder = (CharacterHolder) holder;
-    //characterHolder.characterIdTV.setText(character);
+    characterHolder.characterIdTV.setText(character.getId());
+    characterHolder.nameTV.setText(character.getName());
+    new ImageLoader().loadImage(character.getImage(), characterHolder.characterImgV);
     }
     @Override
     public int getItemCount() {
