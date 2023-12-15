@@ -1,9 +1,7 @@
 package com.example.wikimarvel.data.lists;
 
-import java.util.List;
 
-
-public class Event {
+public class Events {
     private String resourceURI;
     private String name;
 
@@ -11,11 +9,11 @@ public class Event {
         return resourceURI;
     }
 
-    public Event(String resourceURI, String name) {
+    public Events(String resourceURI, String name) {
         this.resourceURI = resourceURI;
         this.name = name;
     }
-    public Event(){}
+    public Events(){}
     public void setResourceURI(String resourceURI) {
         this.resourceURI = resourceURI;
     }

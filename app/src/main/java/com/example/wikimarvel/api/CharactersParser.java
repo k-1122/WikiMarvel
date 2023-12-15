@@ -1,9 +1,14 @@
 package com.example.wikimarvel.api;
 
 import com.example.wikimarvel.data.characters.Character;
-import com.example.wikimarvel.data.lists.Comic;
-import com.example.wikimarvel.data.lists.Event;
+import com.example.wikimarvel.data.lists.Comics;
+import com.example.wikimarvel.data.lists.Events;
 import com.example.wikimarvel.data.lists.Series;
+import com.example.wikimarvel.data.lists.Storys;
+import com.example.wikimarvel.data.objects.Comic;
+import com.example.wikimarvel.data.objects.Event;
+import com.example.wikimarvel.data.objects.Serie;
+import com.example.wikimarvel.data.objects.Story;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,7 +18,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import okhttp3.Response;
 
@@ -36,42 +40,101 @@ public class CharactersParser {
         }
         return characterList;
     }
-    public List<Comic> getComicList(JsonArray comicArray) {
-        List<Comic> List = new LinkedList<>();
+    public List<Comics> getComicsList(JsonArray comicArray) {
+        List<Comics> List = new LinkedList<>();
         for (JsonElement obJson : comicArray) {
-            Comic comic = getComic(obJson.getAsJsonObject());
-            List.add(comic);
+            Comics comics = getComics(obJson.getAsJsonObject());
+            List.add(comics);
         }
         return List;
     }
     public Comic getComic(JsonObject value){
-        String resourceURI = value.get("resourceURI").getAsString();
-        String name = value.get("name").getAsString();
-        Comic comic = new Comic(resourceURI, name);
+        int available = value.get("available").getAsInt();
+        String collectionURI = value.get("collectionURI").getAsString();
+        JsonArray comicsJsonArray = value.getAsJsonArray("items");
+        Comic comic = new Comic(available, collectionURI, getComicsList(comicsJsonArray));
         return comic;
     }
-    public List<Event> getEvent(JsonArray value){
-        List<Event> List = new LinkedList<>();
+    public Comics getComics(JsonObject value){
+        String resourceURI = value.get("resourceURI").getAsString();
+        String name = value.get("name").getAsString();
+        Comics comics = new Comics(resourceURI, name);
+        return comics;
+    }
+    public List<Storys> getStorysList(JsonArray value){
+        List<Storys> List = new LinkedList<>();
         for (JsonElement obJson : value) {
-            Event event = getEvent(obJson.getAsJsonObject());
-            List.add(event);
+            Storys storys = getStorys(obJson.getAsJsonObject());
+            List.add(storys);
         }
         return List;
     }
-    public Event getEvent(JsonObject value){
+    public Storys getStorys(JsonObject value){
         String resourceURI = value.get("resourceURI").getAsString();
         String name = value.get("name").getAsString();
-        Event event = new Event(resourceURI, name);
-        return event;
+        String type = value.get("type").getAsString();
+        Storys storys = new Storys(resourceURI, name, type);
+        return storys;
+    }
+    public Story getStory(JsonObject value){
+        int available = value.get("available").getAsInt();
+        String collectionURI = value.get("collectionURI").getAsString();
+        JsonArray storyJsonArray = value.getAsJsonArray("items");
+        Story story = new Story(available, collectionURI, getStorysList(storyJsonArray));
+        return story;
     }
 
+    public List<Events> getEventsList(JsonArray value){
+        List<Events> list = new LinkedList<>();
+        for(JsonElement obJson : value){
+            Events events = getEvents(obJson.getAsJsonObject());
+            list.add(events);
+        }
+        return list;
+    }
+    public Event getEvent(JsonObject events){
+        int available = events.get("available").getAsInt();
+        String collectionURI = events.get("collectionURI").getAsString();
+        JsonArray eventJsonArray = events.getAsJsonArray("items");
+        Event event = new Event(available, collectionURI, getEventsList(eventJsonArray));
+        return event;
+    }
+    public Events getEvents(JsonObject events) {
+        String resourceURI = events.get("resourceURI").getAsString();
+        String name = events.get("name").getAsString();
+        Events events1 = new Events(resourceURI, name);
+        return events1;
+    }
+    public Series getSeries(JsonObject jsonObject){
+        String resourceURI = jsonObject.get("resourceURI").getAsString();
+        String name = jsonObject.get("name").getAsString();
+        return new Series(resourceURI, name);
+    }
+    public Serie getSerie(JsonObject jsonObject){
+        int available = jsonObject.get("available").getAsInt();
+        String name = jsonObject.get("name").getAsString();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("items");
+        Serie serie = new Serie(available, name, getSeriesList(jsonArray));
+        return serie;
+    }
+    public List<Series> getSeriesList(JsonArray jsonArray){
+        List<Series> seriesList = new LinkedList<>();
+        for (JsonElement objArray : jsonArray){
+            Series series = getSeries(objArray.getAsJsonObject());
+            seriesList.add(series);
+        }
+        return seriesList;
+    }
     public Character getCharacterObj(JsonObject characterObj){
         int id = characterObj.get("id").getAsInt();
         String name = characterObj.get("name").getAsString();
         String description = characterObj.get("description").getAsString();
         String modified = characterObj.get("modified").getAsString();
         String image = characterObj.get("path").getAsString();
-        List<Comic> comics = characterObj.get("comics").getAsString();
-
+        Comic comic = getComic(characterObj.getAsJsonObject("comics"));
+        Story story = getStory(characterObj.getAsJsonObject("stories"));
+        Event event = getEvent(characterObj.getAsJsonObject("events"));
+        Serie serie = getSerie(characterObj.getAsJsonObject("series"));
+        return new Character(id, name, description, modified, image, comic, story, event, serie);
     }
 }

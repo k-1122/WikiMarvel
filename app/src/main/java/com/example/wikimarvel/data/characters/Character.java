@@ -1,11 +1,14 @@
 package com.example.wikimarvel.data.characters;
 
-import com.example.wikimarvel.data.lists.Comic;
-import com.example.wikimarvel.data.lists.Event;
+import com.example.wikimarvel.data.lists.Comics;
+import com.example.wikimarvel.data.lists.Events;
 import com.example.wikimarvel.data.lists.Series;
-import com.example.wikimarvel.data.lists.Story;
+import com.example.wikimarvel.data.lists.Storys;
+import com.example.wikimarvel.data.objects.Comic;
+import com.example.wikimarvel.data.objects.Event;
+import com.example.wikimarvel.data.objects.Serie;
+import com.example.wikimarvel.data.objects.Story;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -15,10 +18,10 @@ public class Character {
     private String description;
     private String modified;
     private String image;
-    private List <Comic> comicList;
-    private List <Story> storyList;
-    private List <Event> eventList;
-    private List <Series> seriesList;
+    private Comic comic;
+    private Story story;
+    private Event event;
+    private Serie serie;
 
     public int getId() {
         return id;
@@ -32,16 +35,16 @@ public class Character {
         return name;
     }
     public Character(){}
-    public Character(int id, String name, String description, String modified, String image, List<Comic> comicList, List<Story> storyList, List<Event> eventList, List<Series> seriesList) {
+    public Character(int id, String name, String description, String modified, String image, Comic comic, Story story, Event event, Serie serie) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.modified = modified;
         this.image = image;
-        this.comicList = comicList;
-        this.storyList = storyList;
-        this.eventList = eventList;
-        this.seriesList = seriesList;
+        this.comic = comic;
+        this.story = story;
+        this.event = event;
+        this.serie = serie;
     }
 
     public void setName(String name) {
@@ -71,24 +74,24 @@ public class Character {
         this.image = image;
     }
 
-    public List<Comic> getComicList() {
-        return comicList;
+    public Comic getComic() {
+        return comic;
     }
 
-    public void setComicList(List<Comic> comicList) {
-        this.comicList = comicList;
+    public void setComic(Comic comic) {
+        this.comic = comic;
     }
 
-    public List<Story> getStoryList() {
-        return storyList;
+    public Story getStory() {
+        return story;
     }
 
-    public void setStoryList(List<Story> storyList) {
-        this.storyList = storyList;
+    public void setStory(Story story) {
+        this.story = story;
     }
 
-    public List<Event> getEventList() {
-        return eventList;
+    public Event getEven() {
+        return event;
     }
 
     @Override
@@ -99,22 +102,22 @@ public class Character {
                 ", description='" + description + '\'' +
                 ", modified='" + modified + '\'' +
                 ", image='" + image + '\'' +
-                ", comicList=" + comicList +
-                ", storyList=" + storyList +
-                ", eventList=" + eventList +
-                ", seriesList=" + seriesList +
+                ", comic=" + comic +
+                ", story=" + story +
+                ", event=" + event +
+                ", serie=" + serie +
                 '}';
     }
 
-    public void setEventList(List<Event> eventList) {
-        this.eventList = eventList;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public List<Series> getSeriesList() {
-        return seriesList;
+    public Serie getSerie() {
+        return serie;
     }
 
-    public void setSeriesList(List<Series> seriesList) {
-        this.seriesList = seriesList;
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
 }

@@ -1,15 +1,19 @@
 package com.example.wikimarvel.data.lists;
 
 
-public class Story {
+public class Comics {
     private String resourceURI;
     private String name;
-    private String type;
 
     public String getResourceURI() {
         return resourceURI;
     }
 
+    public Comics(String resourceURI, String name) {
+        this.resourceURI = resourceURI;
+        this.name = name;
+    }
+    public Comics(){}
     public void setResourceURI(String resourceURI) {
         this.resourceURI = resourceURI;
     }
@@ -22,27 +26,11 @@ public class Story {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public Story(String resourceURI, String name, String type) {
-        this.resourceURI = resourceURI;
-        this.name = name;
-        this.type = type;
-    }
-    public Story(){}
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
-        return "Story{" +
+        return "Comic{" +
                 "resourceURI='" + resourceURI + '\'' +
                 ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
                 '}';
     }
 }
