@@ -1,18 +1,12 @@
 package com.example.wikimarvel.data.characters;
 
-import com.example.wikimarvel.data.lists.Comics;
-import com.example.wikimarvel.data.lists.Events;
-import com.example.wikimarvel.data.lists.Series;
-import com.example.wikimarvel.data.lists.Storys;
 import com.example.wikimarvel.data.objects.Comic;
 import com.example.wikimarvel.data.objects.Event;
 import com.example.wikimarvel.data.objects.Serie;
 import com.example.wikimarvel.data.objects.Story;
 
-import java.util.List;
 
-
-public class Character {
+public class Character_ {
     private int id;
     private String name;
     private String description;
@@ -34,8 +28,8 @@ public class Character {
     public String getName() {
         return name;
     }
-    public Character(){}
-    public Character(int id, String name, String description, String modified, String image, Comic comic, Story story, Event event, Serie serie) {
+    public Character_(){}
+    public Character_(int id, String name, String description, String modified, String image, Comic comic, Story story, Event event, Serie serie) {
         this.id = id;
         this.name = name;
         this.description = description;

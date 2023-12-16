@@ -1,6 +1,8 @@
 package com.example.wikimarvel.api;
 
-import com.example.wikimarvel.data.characters.Character;
+import android.util.Log;
+
+import com.example.wikimarvel.data.characters.Character_;
 import com.example.wikimarvel.data.lists.Comics;
 import com.example.wikimarvel.data.lists.Events;
 import com.example.wikimarvel.data.lists.Series;
@@ -22,7 +24,10 @@ import java.util.List;
 import okhttp3.Response;
 
 public class CharactersParser {
-    public JsonObject parseResponseBody(Response response) {
+    public CharactersParser() {
+    }
+
+    public static JsonObject parseResponseBody(Response response) {
         JsonObject parsedResponse = new JsonObject();
         try (Reader reader = response.body().charStream()) {
             JsonElement rootElement = JsonParser.parseReader(reader);
@@ -32,12 +37,15 @@ public class CharactersParser {
         }
         return parsedResponse;
     }
-    public List<Character> getCharactersList(JsonArray movieArray) {
-        List<Character> characterList = new LinkedList<>();
-        for (JsonElement charactersJson : movieArray) {
-            Character character = getCharacterObj(charactersJson.getAsJsonObject());
-            characterList.add(character);
+    public List<Character_> getCharactersList(JsonArray characterArray) {
+        List<Character_> characterList = new LinkedList<>();
+        if (characterArray != null) {
+            for (JsonElement charactersJson : characterArray) {
+                Character_ character = getCharacterObj(charactersJson.getAsJsonObject());
+                characterList.add(character);
+            }
         }
+        Log.d("DEBUG_List_llamada_ API", "getCharactersList: ");
         return characterList;
     }
     public List<Comics> getComicsList(JsonArray comicArray) {
@@ -125,7 +133,7 @@ public class CharactersParser {
         }
         return seriesList;
     }
-    public Character getCharacterObj(JsonObject characterObj){
+    public Character_ getCharacterObj(JsonObject characterObj){
         int id = characterObj.get("id").getAsInt();
         String name = characterObj.get("name").getAsString();
         String description = characterObj.get("description").getAsString();
@@ -135,6 +143,6 @@ public class CharactersParser {
         Story story = getStory(characterObj.getAsJsonObject("stories"));
         Event event = getEvent(characterObj.getAsJsonObject("events"));
         Serie serie = getSerie(characterObj.getAsJsonObject("series"));
-        return new Character(id, name, description, modified, image, comic, story, event, serie);
+        return new Character_(id, name, description, modified, image, comic, story, event, serie);
     }
 }
